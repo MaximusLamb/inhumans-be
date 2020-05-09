@@ -21,7 +21,8 @@ async function run() {
                     name VARCHAR(512) NOT NULL,
                     cool_factor INTEGER NOT NULL,
                     power VARCHAR(512) NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    owner_id INTEGER NOT NULL REFERENCES users(id),
+                    is_royal BOOLEAN NOT NULL
             );
         `);
 
