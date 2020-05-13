@@ -26,6 +26,16 @@ app.get('/inhumans/:id', async(req, res) => {
   res.json(data.rows[0]);
 });
 
+app.delete('/inhumans/:id', async(req, res) => {
+
+  const remove = await client.query(`  
+  DELETE FROM inhumans
+  WHERE  id = ${req.params.id}
+  RETURNING *;`);
+
+  res.json(remove.rows[0]);
+});
+
 app.post('/create', async(req, res) => {
 
   try {
