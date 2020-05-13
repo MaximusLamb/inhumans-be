@@ -15,15 +15,24 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
-                );           
+                    ); 
+
+                      CREATE TABLE alignments (
+                        id SERIAL PRIMARY KEY NOT NULL,
+                        alignment VARCHAR(512) NOT NULL
+          
+                      );
+
                 CREATE TABLE inhumans (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     cool_factor INTEGER NOT NULL,
                     power VARCHAR(512) NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id),
-                    is_royal BOOLEAN NOT NULL
+                    is_royal BOOLEAN NOT NULL,
+                    alignment_id INTEGER REFERENCES alignments(id)
             );
+
         `);
 
     console.log('create tables complete');
