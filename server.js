@@ -10,21 +10,37 @@ const app = require('./lib/app');
 const PORT = process.env.PORT || 7890;
 
 app.get('/inhumans', async(req, res) => {
-  const data = await client.query(`SELECT inhumans.name, inhumans.cool_factor, inhumans.power, inhumans.is_royal, alignments.alignment
+  const data = await client.query(`
+  SELECT inhumans.id, inhumans.name, inhumans.cool_factor, inhumans.power, inhumans.is_royal, alignments.alignment
   FROM inhumans
   JOIN alignments ON inhumans.alignment_id=alignments.id`);
-
+  
   res.json(data.rows);
 });
 // params are :id shit. and querys are ?anything=stuff
 app.get('/inhumans/:id', async(req, res) => {
-  const data = await client.query(`SELECT inhumans.name, inhumans.cool_factor, inhumans.power, inhumans.is_royal, alignments.alignment
+  
+  const data = await client.query(`SELECT inhumans.id, inhumans.name, inhumans.cool_factor, inhumans.power, inhumans.is_royal, alignments.alignment
   FROM inhumans
   JOIN alignments ON inhumans.alignment_id=alignments.id 
   WHERE inhumans.id=${req.params.id}`);
-
+  
   res.json(data.rows[0]);
 });
+
+
+
+
+app.get('/alignments/:id', async(req, res) => {
+  
+  const data = await client.query(`SELECT inhumans.name, inhumans.cool_factor, inhumans.power, inhumans.is_royal, inhumans.alignment_id
+  FROM inhumans
+  JOIN alignments ON inhumans.alignment_id=alignments.id
+  WHERE alignments.id=${req.params.id}`);
+  
+  res.json(data.rows);
+});
+
 
 app.delete('/inhumans/:id', async(req, res) => {
 

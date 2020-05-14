@@ -1,11 +1,11 @@
 module.exports = [
   {
-    alignment: 'Good',
+    alignment: 'good',
   },
   {
-    alignment: 'Neutral',
+    alignment: 'neutral',
   },
   {
-    alignment: 'Evil',
+    alignment: 'evil',
   }
 ];
